@@ -18,9 +18,14 @@ option:hover {
   background-color: steelblue;
 }
 
-section:first-of-type {
+/* section:first-of-type {
+  display: none;
+} */
+
+#photo-template {
   display: none;
 }
+
 section img {
   margin: 15px auto;
   width: 50%;

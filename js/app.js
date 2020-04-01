@@ -16,9 +16,9 @@ function Horn(horn) {
 
 Horn.prototype.render = function (container) {
   let $container = $(container);
-  let $template = $container.find('#photo-template');
+  let $template = $('#photo-template');
   let $horn = $template.clone();
-  $horn.removeAttr('ID');
+  $horn.removeAttr('id');
   $horn.addClass('myHorns');
   $horn.find('.horn-title').text(this.title);
   $horn.find('.horn-img').attr('src', this.image_url);
@@ -31,16 +31,20 @@ function dropDownRender(object) {
   let $select = $('.dropDown');
   let $optionTemp = $('.optionTemplate');
   let $option = $optionTemp.clone();
-  $option.removeClass();
+  $option.removeClass('optionTemplate');
   $option.text(object.keyword);
 
 
-  if (keywords.every(function (element) {
+  if (keywords.every(function (element) {  //if (!keywords.includes(image.keyword))
     return element !== object.keyword;
   }))
   {keywords.push(object.keyword);
     $select.append($option);
   }
+
+  /*------------------------------------------------------
+   $createOptions.val(image.keyword)
+  -----------------------------------------------------*/ 
 
 }
 $(document).ready(function () {
