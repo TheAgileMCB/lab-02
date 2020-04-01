@@ -1,0 +1,35 @@
+
+/* font-family: 'Spicy Rice', cursive;
+font-family: 'Comic Neue', cursive;
+ */
+
+ header {
+  text-align: center;
+  font-family: 'Spicy Rice', cursive;
+  padding: 15px;
+  margin-bottom: 30px;
+ 
+  
+}
+h1 {
+  font-size: 3.5em;
+  padding: 15px;
+}
+h2 {
+  font-size: 2em;
+  font-family: 'Spicy Rice', cursive;
+
+}
+p {
+  padding: 15px;
+  font-size: 1.5em;
+  font-family: 'Comic Neue', cursive;
+  text-align: center;
+}
+
+footer{
+  clear: both;
+  text-align: center;
+  height: 100px;
+
+}
