@@ -1,0 +1,38 @@
+section {
+  text-align: center;
+  margin: 30px auto;
+  border: 4px double blue;
+  border-radius: 30px;
+  padding: 30px;
+}
+.dropDown {
+  margin: 15px;
+  background-color: mintcream;
+  border-radius: 5px;
+  border: 1px groove slateblue;
+}
+option {
+  background-color: mintcream;
+}
+option:hover {
+  background-color: steelblue;
+}
+
+section:first-of-type {
+  display: none;
+}
+section img {
+  margin: 15px auto;
+  width: 50%;
+}
+
+@media (min-width: 768px) {
+  body {
+    width: 1000px;
+  }
+  section {
+    float: left;
+    width: 500px;
+    height: 500px;
+  }
+}
