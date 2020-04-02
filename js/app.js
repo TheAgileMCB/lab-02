@@ -3,6 +3,9 @@
 const keywords = [];
 const allHorns = [];
 let templateId = '#photo-template';
+const fileName1 = 'data/page-1.json';
+const fileName2 = 'data/page-2.json';
+
 
 console.log('ready to rock');
 
@@ -83,7 +86,11 @@ const ajaxSettings = {
 
 console.log('about to AJAX', ajaxSettings);
 
-$.ajax('data/page-1.json', ajaxSettings)
+function summonHorns (filename){
+
+
+
+$.ajax(fileName1, ajaxSettings)
   .then(function (data) {
 
     data.forEach(horn => {
@@ -101,4 +108,5 @@ $.ajax('data/page-1.json', ajaxSettings)
 
   });
 
-
+}
+summonHorns(fileName1);
