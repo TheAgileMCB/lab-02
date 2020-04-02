@@ -1,8 +1,7 @@
 *{
   box-sizing: border-box;
-  background-color: lightblue;
 }
 body {
   margin: 0 auto;
-  width: 480px;
+  /* width: 480px; */
 }
