@@ -88,13 +88,15 @@ $.ajax('data/page-1.json', ajaxSettings)
 
     data.forEach(horn => {
       let actualHorn = new Horn(horn);
+      //actualHorn.addClass('myHorns');
       allHorns.push(actualHorn);
     });
     console.log(allHorns);
 
     allHorns.forEach(ourNewHorns => {
-      console.log(ourNewHorns);
-      $('main').append(ourNewHorns.toHtml());
+      let aNewHorn = ourNewHorns.toHtml();
+      $(aNewHorn).addClass('myHorns');
+      $('main').append(aNewHorn);
     });
 
   });
