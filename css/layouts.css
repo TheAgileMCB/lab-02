@@ -3,11 +3,26 @@
 font-family: 'Comic Neue', cursive;
  */
 
+ body {
+  background-color: lightblue;
+ }
+
+ main {
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+ }
+
+ section {
+   background: silver;
+ }
+
  header {
   text-align: center;
   font-family: 'Spicy Rice', cursive;
   padding: 15px;
   margin-bottom: 30px;
+  border-bottom: 4px double white;
  
   
 }
@@ -27,9 +42,9 @@ p {
   text-align: center;
 }
 
-footer{
-  clear: both;
+header, footer{
+  background: lightsteelblue;
   text-align: center;
-  height: 100px;
+  height: 150px;
 
 }

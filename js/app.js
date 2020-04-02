@@ -51,14 +51,14 @@ function dropDownRender(object) {
 
   if (keywords.every(function (element) {  //if (!keywords.includes(image.keyword))
     return element !== object.keyword;
-  }))
-  {keywords.push(object.keyword);
+  })) {
+    keywords.push(object.keyword);
     $select.append($option);
   }
 
   /*------------------------------------------------------
    $createOptions.val(image.keyword)
-  -----------------------------------------------------*/ 
+  -----------------------------------------------------*/
 
 }
 $(document).ready(function () {
@@ -85,34 +85,35 @@ const ajaxSettings = {
 
 console.log('about to AJAX', ajaxSettings);
 
-function summonHorns (filename){
-console.log('we have summoned the horns');
-fileNameUsed = filename;
-allHorns = [];
-$.ajax(filename, ajaxSettings)
-  .then(function (data) {
+function summonHorns(filename) {
+  console.log('we have summoned the horns');
+  fileNameUsed = filename;
+  allHorns = [];
+  $.ajax(filename, ajaxSettings)
+    .then(function (data) {
 
-    data.forEach(horn => {
-      let actualHorn = new Horn(horn);
-      //actualHorn.addClass('myHorns');
-      allHorns.push(actualHorn);
+      data.forEach(horn => {
+        let actualHorn = new Horn(horn);
+        //actualHorn.addClass('myHorns');
+        allHorns.push(actualHorn);
+      });
+      console.log(allHorns);
+
+      allHorns.forEach(ourNewHorns => {
+        $('main').append(ourNewHorns.toHtml());
+      });
+
     });
-    console.log(allHorns);
-
-    allHorns.forEach(ourNewHorns => {
-      $('main').append(ourNewHorns.toHtml());
-    });
-
-  });
 
 }
 summonHorns(fileName1);
 
 
 //toggle
-$(function(){
-  $('.toggle').on('click', function(event){
+$(function () {
+  $('.toggle').on('click', function (event) {
     event.preventDefault();
+    $(this).toggleClass('active');
     $('main').empty();
     console.log(fileNameUsed);
     if (fileNameUsed === fileName1) {
