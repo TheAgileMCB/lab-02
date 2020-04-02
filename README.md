@@ -6,9 +6,9 @@ JQuery Selector lab for Code 301
 Driver: Marie
 Navigator(s): Matt & Brennan
 Estimate: 1 hr
-Start Time: 11:22
-End Time:
-Actual Time needed:
+Start Time: 11:22 am
+End Time: 12:12 pm
+Actual Time needed: 50 min
 
 Thoughts:
 

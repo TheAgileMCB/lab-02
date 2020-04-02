@@ -9,6 +9,13 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layouts.css">
   <link rel="stylesheet" href="css/modules.css">
+  <script id="photo-template" type="text/x-tmpl-mustache">
+    <section class="myHorns">
+      <h2 class="horn-title">{{title}}</h2>
+      <img class="horn-img" src="{{image_url}}" alt=""/>
+        <p class="horn-description">{{description}}</p>
+    </section>
+  </script>
 </head>
 
 <body>
@@ -19,15 +26,23 @@
     </select>
   </header>
   <main>
-    <script id="photo-template" type="text/x-tmpl-mustache">
-      <section class="myHorns">
-        <h2 class="horn-title">{{title}}</h2>
-        <img class="horn-img" src="{{image_url}}" alt=""/>
-          <p class="horn-description">{{description}}</p>
-      </section>
-    </script>
+   
+
+ 
+
+
+
+
+
   </main>
   <footer>
+    <div class="toggle">
+      <div class="toggle-label toggle-label-off">Option A</div>
+      <div class="toggle-switch"></div>
+      <div class="toggle-label toggle-label-on">Option B</div>
+    </div>
+
+
     &copy; 2018 Code Fellows
   </footer>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"

@@ -1,11 +1,11 @@
 'use strict';
 
 const keywords = [];
-const allHorns = [];
+var allHorns = [];
 let templateId = '#photo-template';
 const fileName1 = 'data/page-1.json';
 const fileName2 = 'data/page-2.json';
-
+var fileNameUsed = '';
 
 console.log('ready to rock');
 
@@ -37,7 +37,6 @@ function Horn(horn) {
 Horn.prototype.toHtml = function () {
   let template = $(templateId).html();
   let html = Mustache.render(template, this);
-  console.log(this);
   dropDownRender(this);
   return html;
 }
@@ -87,10 +86,10 @@ const ajaxSettings = {
 console.log('about to AJAX', ajaxSettings);
 
 function summonHorns (filename){
-
-
-
-$.ajax(fileName1, ajaxSettings)
+console.log('we have summoned the horns');
+fileNameUsed = filename;
+allHorns = [];
+$.ajax(filename, ajaxSettings)
   .then(function (data) {
 
     data.forEach(horn => {
@@ -101,12 +100,28 @@ $.ajax(fileName1, ajaxSettings)
     console.log(allHorns);
 
     allHorns.forEach(ourNewHorns => {
-      let aNewHorn = ourNewHorns.toHtml();
-      $(aNewHorn).addClass('myHorns');
-      $('main').append(aNewHorn);
+      $('main').append(ourNewHorns.toHtml());
     });
 
   });
 
 }
 summonHorns(fileName1);
+
+
+//toggle
+$(function(){
+  $('.toggle').on('click', function(event){
+    event.preventDefault();
+    $('main').empty();
+    console.log(fileNameUsed);
+    if (fileNameUsed === fileName1) {
+      summonHorns(fileName2);
+      console.log(fileNameUsed);
+
+    } else if (fileNameUsed === fileName2) {
+      summonHorns(fileName1);
+    }
+
+  });
+});
