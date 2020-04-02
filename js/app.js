@@ -2,7 +2,8 @@
 
 const keywords = [];
 const allHorns = [];
-// const newHorns = [];
+let templateId = '#photo-template';
+
 console.log('ready to rock');
 
 function Horn(horn) {
@@ -11,21 +12,32 @@ function Horn(horn) {
   this.description = horn.description;
   this.keyword = horn.keyword;
   this.horns = horn.horns;
-  allHorns.push(this);
+
+  // for (let key in horn) {
+  //   this[key] = horn[key];
+  // }
 }
 
-Horn.prototype.render = function (container) {
-  let $container = $(container);
-  let $template = $('#photo-template');
-  let $horn = $template.clone();
-  $horn.removeAttr('id');
-  $horn.addClass('myHorns');
-  $horn.find('.horn-title').text(this.title);
-  $horn.find('.horn-img').attr('src', this.image_url);
-  $horn.find('.horn-description').text(this.description);
-  $container.append($horn);
+// Horn.prototype.render = function (container) {
+//   let $container = $(container);
+//   let $template = $('#photo-template');
+//   let $horn = $template.clone();
+//   $horn.removeAttr('id');
+//   $horn.addClass('myHorns');
+//   $horn.find('.horn-title').text(this.title);
+//   $horn.find('.horn-img').attr('src', this.image_url);
+//   $horn.find('.horn-description').text(this.description);
+//   $container.append($horn);
+//   dropDownRender(this);
+// };
+
+Horn.prototype.toHtml = function () {
+  let template = $(templateId).html();
+  let html = Mustache.render(template, this);
+  console.log(this);
   dropDownRender(this);
-};
+  return html;
+}
 
 function dropDownRender(object) {
   let $select = $('.dropDown');
@@ -53,10 +65,9 @@ $(document).ready(function () {
     console.log(selectedKeyword);
     let $oldHorns = $('.myHorns');
     $oldHorns.remove();
-    // newHorns = [];
     allHorns.forEach(element => {
       if (element.keyword === selectedKeyword) {
-        element.render('main');
+        $('main').append(element.toHtml());
       }
     });
 
@@ -74,12 +85,18 @@ console.log('about to AJAX', ajaxSettings);
 
 $.ajax('data/page-1.json', ajaxSettings)
   .then(function (data) {
-    console.log(data);
 
     data.forEach(horn => {
       let actualHorn = new Horn(horn);
-      actualHorn.render('main');
+      allHorns.push(actualHorn);
+    });
+    console.log(allHorns);
+
+    allHorns.forEach(ourNewHorns => {
+      console.log(ourNewHorns);
+      $('main').append(ourNewHorns.toHtml());
     });
 
-
   });
+
+
