@@ -5,10 +5,10 @@ JQuery Selector lab for Code 301
 #### Feature 1 - pagination
 Driver: Marie
 Navigator(s): Matt & Brennan
-Estimate:
-Start Time:
-End Time:
-Actual Time needed:
+Estimate: 1 hr
+Start Time: 11:22 am
+End Time: 12:12 pm
+Actual Time needed: 50 min
 
 Thoughts:
 
