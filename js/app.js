@@ -1,6 +1,6 @@
 'use strict';
 
-const keywords = [];
+var keywords = [];
 var allHorns = [];
 let templateId = '#photo-template';
 const fileName1 = 'data/page-1.json';
@@ -37,9 +37,10 @@ function Horn(horn) {
 Horn.prototype.toHtml = function () {
   let template = $(templateId).html();
   let html = Mustache.render(template, this);
-  dropDownRender(this);
+
   return html;
 }
+
 
 function dropDownRender(object) {
   let $select = $('.dropDown');
@@ -47,35 +48,68 @@ function dropDownRender(object) {
   let $option = $optionTemp.clone();
   $option.removeClass('optionTemplate');
   $option.text(object.keyword);
-
-
-  if (keywords.every(function (element) {  //if (!keywords.includes(image.keyword))
-    return element !== object.keyword;
-  }))
-  {keywords.push(object.keyword);
+  if (!keywords.includes(object.keyword)) {
+    // console.log($option);
+    keywords.push(object.keyword);
     $select.append($option);
   }
 
   /*------------------------------------------------------
    $createOptions.val(image.keyword)
-  -----------------------------------------------------*/ 
-
+  -----------------------------------------------------*/
 }
+// function dropDownRender2() {
+//   console.log('rendered drop down menu');
+//   keywords.forEach(element => {
+//     $('.dropDown').append(element);
+//   });
+// }
+// dropDownRender2();
 $(document).ready(function () {
   $('.dropDown').change(function () {
     let selectedKeyword = $(this).children('option:selected').text();
     console.log(selectedKeyword);
     let $oldHorns = $('.myHorns');
-    $oldHorns.remove();
+    
+    if (selectedKeyword !== 'Filter by Keyword') {
+      $oldHorns.remove();
     allHorns.forEach(element => {
       if (element.keyword === selectedKeyword) {
         $('main').append(element.toHtml());
       }
     });
-
-
+  }
   });
 });
+
+$(document).ready(function () {
+  $('.dropDownSort').change(function () {
+    let selectedSort = $(this).children('option:selected').val();
+    console.log(selectedSort);
+    sortHorns(selectedSort);
+  });
+});
+
+function sortHorns(sortType) {
+  $('main').empty();
+  if (sortType === 'numberHorns') {
+  allHorns.sort((a, b) => {
+    return a.horns - b.horns;
+  });
+} else if (sortType === 'title') {
+  allHorns.sort((a,b) => {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1;
+    } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return 1;
+    } else {
+      return 0;
+    } 
+  } )
+}
+  renderHorns(allHorns);
+}
+
 
 
 const ajaxSettings = {
@@ -85,34 +119,45 @@ const ajaxSettings = {
 
 console.log('about to AJAX', ajaxSettings);
 
-function summonHorns (filename){
-console.log('we have summoned the horns');
-fileNameUsed = filename;
-allHorns = [];
-$.ajax(filename, ajaxSettings)
-  .then(function (data) {
+function summonHorns(filename) {
+  console.log('we have summoned the horns');
+  fileNameUsed = filename;
+  allHorns = [];
+  keywords = [];
+  $('.dropDown').find('option:not(:first-child)').remove();
+  $.ajax(filename, ajaxSettings)
+    .then(function (data) {
 
-    data.forEach(horn => {
-      let actualHorn = new Horn(horn);
-      //actualHorn.addClass('myHorns');
-      allHorns.push(actualHorn);
+      data.forEach(horn => {
+        let actualHorn = new Horn(horn);
+        allHorns.push(actualHorn);
+      });
+      // console.log(allHorns);
+
+      // allHorns.forEach(ourNewHorns => {
+      //   $('main').append(ourNewHorns.toHtml());
+      // });
+      renderHorns(allHorns);
+      allHorns.forEach(element => {
+        // console.log(element);
+        dropDownRender(element);
+      })
     });
-    console.log(allHorns);
-
-    allHorns.forEach(ourNewHorns => {
-      $('main').append(ourNewHorns.toHtml());
-    });
-
-  });
 
 }
 summonHorns(fileName1);
 
+function renderHorns(arr) {
+  arr.forEach(ourNewHorns => {
+    $('main').append(ourNewHorns.toHtml());
+  });
 
+}
 //toggle
-$(function(){
-  $('.toggle').on('click', function(event){
+$(function () {
+  $('.toggle').on('click', function (event) {
     event.preventDefault();
+    $(this).toggleClass('active');
     $('main').empty();
     console.log(fileNameUsed);
     if (fileNameUsed === fileName1) {
